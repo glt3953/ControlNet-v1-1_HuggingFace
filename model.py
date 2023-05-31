@@ -109,6 +109,7 @@ class Model:
             prompt = translator.translate(prompt) #翻译为英文
             print(prompt)
             prompt = f'{prompt}, {additional_prompt}'
+            print(prompt)
         return prompt
 
     @torch.autocast('cuda')
@@ -125,6 +126,7 @@ class Model:
         if seed == -1:
             seed = np.random.randint(0, np.iinfo(np.int64).max)
         generator = torch.Generator().manual_seed(seed)
+        print(self.task_name)
         return self.pipe(prompt=prompt,
                          negative_prompt=negative_prompt,
                          guidance_scale=guidance_scale,
