@@ -105,7 +105,9 @@ class Model:
         if not prompt:
             prompt = additional_prompt
         else:
+            print(prompt)
             prompt = translator.translate(prompt) #翻译为英文
+            print(prompt)
             prompt = f'{prompt}, {additional_prompt}'
         return prompt
 
