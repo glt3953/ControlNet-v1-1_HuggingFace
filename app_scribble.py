@@ -10,7 +10,7 @@ def create_demo(process, max_images=12, default_num_images=3):
         with gr.Row():
             with gr.Column():
                 image = gr.Image()
-                prompt = gr.Textbox(label='Prompt')
+                prompt = gr.Textbox(label='作品描述', placeholder='请输入您的创作想法')
                 run_button = gr.Button('Run')
                 with gr.Accordion('Advanced options', open=False):
                     preprocessor_name = gr.Radio(
@@ -56,7 +56,7 @@ def create_demo(process, max_images=12, default_num_images=3):
                         label='Additional prompt',
                         value='best quality, extremely detailed')
                     n_prompt = gr.Textbox(
-                        label='Negative prompt',
+                        label='Negative prompt',#排除内容
                         value=
                         'longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality'
                     )

@@ -127,4 +127,4 @@ with gr.Blocks(css='style.css') as demo:
                                    inputs=new_base_model_id,
                                    outputs=current_base_model)
 
-demo.queue(api_open=False, max_size=10).launch()
+demo.queue(api_open=True, max_size=10).launch(share=True)

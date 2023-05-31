@@ -12,6 +12,10 @@ from diffusers import (ControlNetModel, DiffusionPipeline,
 
 from cv_utils import resize_image
 from preprocessor import Preprocessor
+from translate import Translator
+
+# 初始化Translator对象,指定源语言和目标语言
+translator = Translator(from_lang="zh", to_lang="en")
 
 CONTROLNET_MODEL_IDS = {
     'Openpose': 'lllyasviel/control_v11p_sd15_openpose',
@@ -37,7 +41,7 @@ def download_all_controlnet_weights() -> None:
 
 class Model:
     def __init__(self,
-                 base_model_id: str = 'runwayml/stable-diffusion-v1-5',
+                 base_model_id: str = 'runwayml/stable-diffusion-v1-5', #runwayml/stable-diffusion-inpainting
                  task_name: str = 'Canny'):
         self.device = torch.device(
             'cuda:0' if torch.cuda.is_available() else 'cpu')
@@ -101,6 +105,7 @@ class Model:
         if not prompt:
             prompt = additional_prompt
         else:
+            prompt = translator.translate(prompt) #翻译为英文
             prompt = f'{prompt}, {additional_prompt}'
         return prompt
 
